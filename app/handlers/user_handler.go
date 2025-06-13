@@ -9,27 +9,27 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-type RegisterHandler interface {
+type UserHandler interface {
 	Register(c *fiber.Ctx) error
 	Update(c *fiber.Ctx) error
 	List(c *fiber.Ctx) error
 }
 
-type registerHandler struct {
+type userHandler struct {
 	userService services.UserService
 }
 
-func NewRegisterHandler(userService services.UserService) RegisterHandler {
-	return &registerHandler{userService: userService}
+func NewUserHandler(userService services.UserService) UserHandler {
+	return &userHandler{userService: userService}
 }
 
-func RegisterUserRoutes(route fiber.Router, handler RegisterHandler) {
+func RegisterUserRoutes(route fiber.Router, handler UserHandler) {
 	route.Post("/register", handler.Register)
 	route.Put("/update", handler.Update)
 	route.Get("/list", handler.List)
 }
 
-func (h *registerHandler) Register(c *fiber.Ctx) error {
+func (h *userHandler) Register(c *fiber.Ctx) error {
 	var newUser models.UserRegister
 	if err := c.BodyParser(&newUser); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(app.NewResponseError(err))
@@ -47,7 +47,7 @@ func (h *registerHandler) Register(c *fiber.Ctx) error {
 	return c.JSON(app.NewResponse("User registered successfully", nil))
 }
 
-func (h *registerHandler) Update(c *fiber.Ctx) error {
+func (h *userHandler) Update(c *fiber.Ctx) error {
 	var userUpdate models.UserUpdatePassword
 	if err := c.BodyParser(&userUpdate); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(app.NewResponseError(err))
@@ -65,7 +65,7 @@ func (h *registerHandler) Update(c *fiber.Ctx) error {
 	return c.JSON(app.NewResponse("User updated successfully", nil))
 }
 
-func (h *registerHandler) List(c *fiber.Ctx) error {
+func (h *userHandler) List(c *fiber.Ctx) error {
 	users, err := h.userService.List()
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(app.NewResponseError(err))

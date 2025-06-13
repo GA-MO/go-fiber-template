@@ -43,7 +43,7 @@ func main() {
 	// Register routes
 	userRepository := repositories.NewUserRepository(db)
 	userService := services.NewUserService(userRepository)
-	userHandler := handlers.NewRegisterHandler(userService)
+	userHandler := handlers.NewUserHandler(userService)
 	handlers.RegisterUserRoutes(api.Group("/v1/user"), userHandler)
 
 	// Start server

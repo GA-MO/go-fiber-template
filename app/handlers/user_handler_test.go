@@ -105,7 +105,7 @@ func TestUserHandler(t *testing.T) {
 
 	app := fiber.New()
 	userServiceMock := services.NewUserServiceMock()
-	handler := NewRegisterHandler(userServiceMock)
+	handler := NewUserHandler(userServiceMock)
 	group := "/api/v1/user"
 	RegisterUserRoutes(app.Group(group), handler)
 
