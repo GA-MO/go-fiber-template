@@ -1,0 +1,89 @@
+Please implement a complete [FEATURE_NAME] management feature for this Golang application following our established clean architecture patterns and testing standards.
+
+## Feature Requirements
+[Describe your feature requirements here - what models, operations, business logic, etc.]
+
+## Implementation Requirements
+
+### 🏗️ Architecture Compliance
+- Follow the established Repository-Service-Handler clean architecture pattern
+- Implement proper dependency injection as shown in main.go
+- Follow naming conventions from Naming-conventions.md
+- Adhere to architecture guidelines from Architecture-guidelines.md
+
+### 📊 Database & Models
+- Create appropriate models in `app/models/` with proper JSON tags (camelCase)
+- Update `database/sqlite.go` with required tables and relationships
+- Include proper foreign key constraints and indexes
+- Follow the established database schema patterns
+
+### 🔄 Complete Layer Implementation
+
+#### Repository Layer (`app/repositories/`)
+- Create interface and implementation for data access
+- Include all CRUD operations needed
+- Handle database errors appropriately
+- Create comprehensive tests with sqlmock (`*_repository_test.go`)
+- Create mock implementation (`*_repository_mock.go`)
+
+#### Service Layer (`app/services/`)
+- Create interface and implementation for business logic
+- Include proper validation and error handling
+- Create custom error types (e.g., `FeatureError`)
+- Create comprehensive tests with repository mocks (`*_service_test.go`)
+- Create mock implementation (`*_service_mock.go`)
+
+#### Handler Layer (`app/handlers/`)
+- Create HTTP handlers for all endpoints
+- Include proper request validation and response formatting
+- Follow RESTful API patterns under `/api/v1/` prefix
+- Create comprehensive tests with service mocks (`*_handler_test.go`)
+
+### 🧪 Testing Requirements (MANDATORY)
+**Following Testing-standard.md requirements:**
+
+1. **Repository Tests** - Using sqlmock, test all CRUD operations, error scenarios, edge cases
+2. **Service Tests** - Using repository mocks, test business logic, validation, error handling
+3. **Handler Tests** - Using service mocks, test all HTTP endpoints, status codes, validation
+
+**Critical Test Files Required:**
+- `*_repository_test.go` - Repository layer tests with sqlmock (see SQLMock-Testing-Guide.md)
+- `*_service_test.go` - Service layer tests with repository mocks  
+- `*_handler_test.go` - Handler layer tests with service mocks
+- Ensure ALL components have corresponding test files (don't miss any!)
+
+**SQLMock Testing Reminders:**
+- Use ExpectExec() for INSERT/UPDATE/DELETE operations (db.Exec)
+- Use ExpectQuery() for SELECT operations (db.Query/QueryRow)
+- For Create/Update methods: ExpectExec() → ExpectQuery() (INSERT then SELECT)
+- Use simple regex patterns: "INSERT INTO table" not exact string matching
+- Always check repository implementation before writing test expectations
+
+**Testing Patterns:**
+- Use table-driven tests for comprehensive coverage
+- Follow naming: `FeatureServiceMock` (not `MockFeatureService`)
+- Test success cases, validation errors, service errors, edge cases
+- Ensure all tests pass: `go test ./app/... -v`
+
+### 🔌 Integration
+- Update `main.go` with proper dependency injection
+- Register routes following established patterns
+- Ensure proper error handling and logging
+- Include health check considerations if needed
+
+### 📝 Implementation Standards
+- Use proper Go naming conventions (camelCase for JSON, PascalCase for exports)
+- Include comprehensive error messages
+- Follow the established code review checklist
+- Ensure no code duplication with existing patterns
+
+## Expected Deliverables
+1. Complete model definitions
+2. Database schema updates
+3. Repository layer with interface, implementation, tests, and mocks
+4. Service layer with interface, implementation, tests, and mocks  
+5. Handler layer with implementation and tests
+6. Updated main.go with dependency injection
+7. All tests passing with comprehensive coverage
+
+Please implement this feature completely, ensuring it follows all established patterns from existing features like Role and Permission management. The implementation should be production-ready with full test coverage across all layers.

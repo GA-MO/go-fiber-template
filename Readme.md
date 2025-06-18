@@ -2,11 +2,11 @@
 
 This is a basic Go project template using the Fiber web framework.
 
-## 📛 Naming Conventions
+## 📛 Documentation
 
-- [Architecture Guidelines](./Architecture-guidelines.md)
-- [Naming Conventions](./Naming-conventions.md)
-- [Testing Standards](./Testing-standard.md)
+- [Architecture Guidelines](./docs/Architecture-guidelines.md)
+- [Naming Conventions](./docs/Naming-conventions.md)
+- [Testing Standards](./docs/Testing-standards.md)
 
 ## 🛠️ Prerequisites
 
