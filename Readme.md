@@ -6,6 +6,7 @@ This is a basic Go project template using the Fiber web framework.
 
 - [Architecture Guidelines](./Architecture-guidelines.md)
 - [Naming Conventions](./Naming-conventions.md)
+- [Testing Standards](./Testing-standard.md)
 
 ## 🛠️ Prerequisites
 
